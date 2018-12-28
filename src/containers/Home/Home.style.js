@@ -1,8 +1,8 @@
-import styled, {css} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 
 export const Image = styled.img`
   width: 100%;
-`;
+`
 
 export const DinoImage = styled.div`
   height: 150vh;
@@ -24,7 +24,27 @@ export const DinoImage = styled.div`
   h1 {
     margin-bottom: 0;
   }
-`;
+`
+
+
+const hideTransition = keyframes`
+  from {
+    transform: rotateY(90deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+`
+const revealTransition = keyframes`
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(90deg);
+  }
+`
 
 export const RevealP = styled.p`
   position: relative;
@@ -35,16 +55,19 @@ export const RevealP = styled.p`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: tomato;
 
     transform-origin: left;
+    animation: ${revealTransition} 3s;
     transform: rotateY(90deg);
-    transition: transform 3s;
+    
   }
 
-  ${({hide}) => hide && css`
+  ${({ hide }) => hide && css`
     &:after {
+      transform-origin: left;
+      animation: ${hideTransition} 3s;
       transform: rotateY(0deg);
     }
   `}
-`;
+`
